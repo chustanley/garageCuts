@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- This has to reference to the same css file -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body id="body">
+    <!-- Bundle.js file is the output file from running the webpack command.
+         Webpack is a module bundler and it bundles together all the files into a single file output
+         It will use Babel and transpile the code into browser readable code
+
+         The reason why we need webpack to compile all these files w/ babel transpilation is because
+         some Javascript code is not supported by all web browsers and transpiling allows you to write
+         code using the latest language features (es6) while ensuring it can still be executed in a wide range of browsers
+
+         Result: add it as a script tag and this will play as the SRC
+        -->
+    <script src="bundle.js"></script>
+  </body>
+</html>
