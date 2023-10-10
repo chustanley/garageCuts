@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    /*
+    BG - BACKGROUND color
+    Text - text color
+    Tracking-wide -> wider space between words
+    */
+    @apply bg-[#ecf0f3] text-[#1f2937] tracking-wide;
+  }
+}
+
+#id {
+  margin-left: 100px;
+}
