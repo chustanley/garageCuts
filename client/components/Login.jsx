@@ -1,6 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { auth } from "../../server/firebase.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
+//All these are from line 2 as well so you can really say auth.GoogleAuthProvider
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  signOut,
+  onAuthStateChanged,
+} from "firebase/auth";
 
 import Signup from "./Signup.jsx";
 
@@ -14,6 +22,9 @@ const Login = () => {
 
   // Firebase error for displaying error
   const [firebaseError, setFirebaseError] = useState(false);
+
+  //CurrentUser
+  const [user, setUser] = useState({});
 
   // Firebase authentication function
   const loginAccount = () => {
@@ -29,6 +40,26 @@ const Login = () => {
         setFirebaseError(true);
       });
   };
+
+  const googleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider);
+  };
+
+  const logOut = () => {
+    signOut(auth);
+    console.log(user);
+  };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      console.log("USERR", currentUser);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return signUp ? (
     <Signup signUp={signUp} setSignUp={setSignUp} />
@@ -104,8 +135,19 @@ const Login = () => {
                 </div>
               </h4>
             </div>
-            <div>
-              <h1></h1>
+            <div
+              onClick={() => {
+                googleSignIn();
+              }}
+            >
+              <h1>GOOGLE</h1>
+            </div>
+            <div
+              onClick={() => {
+                logOut();
+              }}
+            >
+              <h1>SIGNOUT</h1>
             </div>
           </div>
         </div>
