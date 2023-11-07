@@ -1,65 +1,55 @@
 import React, { useState, useEffect } from "react";
-import { auth } from "../../server/firebase.js";
-import { signInWithEmailAndPassword } from "firebase/auth";
-//All these are from line 2 as well so you can really say auth.GoogleAuthProvider
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithRedirect,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
+
+//Importing the useContext FUNCTION so we can get the values accessible.
+import { UserAuth } from "../src/context/AuthContext.js";
+
+//How to access state within slice and also access function to address state
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../src/store/account.js";
+
+//We use useNavigate to go through the dom but the 'routes' have to be assigned higher in the tree
+//Routes are assigned in /src/app.js
+import { useNavigate } from "react-router-dom";
 
 import Signup from "./Signup.jsx";
 
 const Login = () => {
+  //HOW TO USE REDUX STATE MANAGEMENT LIBRARY
+  const account = useSelector((state) => state.account.value);
+  const dispatch = useDispatch();
+  console.log("REDUX", account);
+
+  //HOW TO USE CONTEXT LIBRARY STATE MANAGEMENT
+  //Call UserAuth to get access to its function and state in its 'component context'
+  const { googleSignIn, loginAccount, user } = UserAuth();
+  const navigate = useNavigate();
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleSignIn();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //User is in the Context Library and is a global state, any change to it NOT being null will trigger
+  //Navigation to account page
+  useEffect(() => {
+    if (user !== null) {
+      navigate("/account");
+    }
+  }, [user]);
+
+  const test = () => {
+    dispatch(login({ account: "testchange" }));
+  };
+
   // Login Credentials
   const [loginUser, setLoginUser] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
   // Page and CSS conditional styling
   const [signUp, setSignUp] = useState(false);
-
-  // Firebase error for displaying error
-  const [firebaseError, setFirebaseError] = useState(false);
-
-  //CurrentUser
-  const [user, setUser] = useState({});
-
-  // Firebase authentication function
-  const loginAccount = () => {
-    signInWithEmailAndPassword(auth, loginUser, loginPassword)
-      .then((data) => {
-        if (!data) {
-          throw data;
-        }
-        //SEND TO NEXT PAGE?
-        setFirebaseError(false);
-      })
-      .catch((err) => {
-        setFirebaseError(true);
-      });
-  };
-
-  const googleSignIn = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider);
-  };
-
-  const logOut = () => {
-    signOut(auth);
-    console.log(user);
-  };
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      console.log("USERR", currentUser);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
 
   return signUp ? (
     <Signup signUp={signUp} setSignUp={setSignUp} />
@@ -68,7 +58,13 @@ const Login = () => {
       <div className="w-full h-full mx-auto flex justify-center items-center">
         {/* LOGIN BOX  */}
         <div className="shadow-xl shadow-gray-400 rounded-xl p-5 w-full h-[60%] bg-gray-200 max-w-[500px] m-5">
-          <h1>Garage Cuts</h1>
+          <h1
+            onClick={() => {
+              test();
+            }}
+          >
+            Garage Cuts
+          </h1>
           <div className="my-5 h-[80%] rounded-lg bg-slate-300 p-5 justify-center items-center flex">
             <form className="w-full">
               <div className="mt-10">
@@ -100,20 +96,13 @@ const Login = () => {
               <div className="justify-center items-center flex text-xs my-3 text-blue-600">
                 Forgot your email or password?
               </div>
-              <div>
-                {firebaseError ? (
-                  <div className="justify-center items-center flex text-xs my-3 text-red-600">
-                    Invalid username or password. Please try again.
-                  </div>
-                ) : (
-                  <></>
-                )}
-              </div>
+
               <div className="flex justify-center">
                 <button
+                  type="button"
                   className="px-5 py-2 mt-7 bg-slate-500 rounded-lg hover:bg-gradient-to-r from-[#ffb115] to-[#f6dc30]"
                   onClick={() => {
-                    loginAccount();
+                    loginAccount(loginUser, loginPassword);
                   }}
                 >
                   <h4 className="uppercase text-sm text-white">sign in</h4>
@@ -121,7 +110,7 @@ const Login = () => {
               </div>
             </form>
           </div>
-          <div>
+          <div className="flex justify-between">
             <div>
               <h4 className="text-xs">
                 Don't have an account?{" "}
@@ -135,20 +124,13 @@ const Login = () => {
                 </div>
               </h4>
             </div>
-            <div
+            <h1
               onClick={() => {
-                googleSignIn();
+                handleGoogleSignIn();
               }}
             >
-              <h1>GOOGLE</h1>
-            </div>
-            <div
-              onClick={() => {
-                logOut();
-              }}
-            >
-              <h1>SIGNOUT</h1>
-            </div>
+              google
+            </h1>
           </div>
         </div>
       </div>

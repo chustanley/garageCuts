@@ -53,6 +53,8 @@ const Signup = (props) => {
     }
     setWrongPassword(false);
 
+    //If successful, it will trigger the onAuthStateChanged listener inside of AuthContext useEffect
+    //That will then change the state of user which inside of login, will redirect into account.
     createUserWithEmailAndPassword(auth, email, firstPassword)
       .then((userCredentials) => {
         if (!userCredentials) {

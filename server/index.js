@@ -11,6 +11,11 @@ app.use(express.static(path.join(__dirname, "/../client/src")));
 //Express.json() parses the passed in object into a js object in the req.body
 app.use(express.json());
 
+//Fixes error on refresh.
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/../client/src/index.html"));
+});
+
 app.listen(3000, () => {
   console.log("SUCCESSFULLY CONNECTED TO LOCALHOST @ PORT 3000");
 });
