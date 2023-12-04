@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { auth } from "../../server/firebase.js";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const Signup = (props) => {
   //SIGNUP PAGE STYLE RENDERING
@@ -9,7 +9,7 @@ const Signup = (props) => {
   const [missingPassword, setMissingPassword] = useState(false);
 
   //SIGNUP STATE RENDERING
-  const [username, setUsername] = useState("");
+
   const [firstPassword, setFirstPassword] = useState("");
   const [secondPassword, setSecondPassword] = useState("");
 
@@ -26,7 +26,6 @@ const Signup = (props) => {
     console.log("CHECKING CREDENTIALS...");
 
     console.log(
-      username,
       firstPassword,
       secondPassword,
       firstName,
@@ -62,7 +61,10 @@ const Signup = (props) => {
         }
         setFirebaseError(false);
         console.log("FIREBASE SUCCESS!!!", userCredentials);
-        props.setSignUp(false);
+
+        /*
+          Maybe in here, get the state and set it to profile and then from there, you get data back and set it to user state?
+        */
       })
       .catch((err) => {
         setFirebaseError(true);
@@ -128,18 +130,6 @@ const Signup = (props) => {
 
             <form id="formTwo" className="w-full">
               <div className="mt-10">
-                <div className="flex flex-col">
-                  <label className="uppercase text-sm py-2">Username</label>
-                  <input
-                    id="createUser"
-                    className="border-2 rounded-lg p-3 flex border-gray-300"
-                    type="text"
-                    value={username}
-                    onChange={(e) => {
-                      setUsername(e.target.value);
-                    }}
-                  />
-                </div>
                 <div className="flex flex-col">
                   <label className="uppercase text-sm py-2">Password</label>
                   <input

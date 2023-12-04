@@ -17,7 +17,6 @@ const Login = () => {
   //HOW TO USE REDUX STATE MANAGEMENT LIBRARY
   const account = useSelector((state) => state.account.value);
   const dispatch = useDispatch();
-  console.log("REDUX", account);
 
   //HOW TO USE CONTEXT LIBRARY STATE MANAGEMENT
   //Call UserAuth to get access to its function and state in its 'component context'
@@ -36,13 +35,10 @@ const Login = () => {
   //Navigation to account page
   useEffect(() => {
     if (user !== null) {
+      console.log("USER?", user);
       navigate("/account");
     }
   }, [user]);
-
-  const test = () => {
-    dispatch(login({ account: "testchange" }));
-  };
 
   // Login Credentials
   const [loginUser, setLoginUser] = useState("");
@@ -58,18 +54,12 @@ const Login = () => {
       <div className="w-full h-full mx-auto flex justify-center items-center">
         {/* LOGIN BOX  */}
         <div className="shadow-xl shadow-gray-400 rounded-xl p-5 w-full h-[60%] bg-gray-200 max-w-[500px] m-5">
-          <h1
-            onClick={() => {
-              test();
-            }}
-          >
-            Garage Cuts
-          </h1>
+          <h1>Garage Cuts</h1>
           <div className="my-5 h-[80%] rounded-lg bg-slate-300 p-5 justify-center items-center flex">
             <form className="w-full">
               <div className="mt-10">
                 <div className="flex flex-col">
-                  <label className="uppercase text-sm py-2">Username</label>
+                  <label className="uppercase text-sm py-2">Email</label>
                   <input
                     id="username"
                     className="border-2 rounded-lg p-3 flex border-gray-300"

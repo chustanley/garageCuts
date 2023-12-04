@@ -556,17 +556,6 @@ video {
     max-width: 1536px;
   }
 }
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
 .visible {
   visibility: visible;
 }
@@ -588,14 +577,29 @@ video {
 .relative {
   position: relative;
 }
+.left-0 {
+  left: 0px;
+}
+.left-\[-100\%\] {
+  left: -100%;
+}
+.top-0 {
+  top: 0px;
+}
+.m-40 {
+  margin: 10rem;
+}
+.m-44 {
+  margin: 11rem;
+}
 .m-5 {
   margin: 1.25rem;
 }
-.m-3 {
-  margin: 0.75rem;
+.m-52 {
+  margin: 13rem;
 }
-.m-2 {
-  margin: 0.5rem;
+.m-56 {
+  margin: 14rem;
 }
 .mx-auto {
   margin-left: auto;
@@ -609,8 +613,14 @@ video {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
 }
+.ml-10 {
+  margin-left: 2.5rem;
+}
 .mt-10 {
   margin-top: 2.5rem;
+}
+.mt-20 {
+  margin-top: 5rem;
 }
 .mt-3 {
   margin-top: 0.75rem;
@@ -642,6 +652,9 @@ video {
 .hidden {
   display: none;
 }
+.h-20 {
+  height: 5rem;
+}
 .h-\[60\%\] {
   height: 60%;
 }
@@ -651,23 +664,20 @@ video {
 .h-full {
   height: 100%;
 }
+.h-screen {
+  height: 100vh;
+}
 .min-h-screen {
   min-height: 100vh;
+}
+.w-\[75\%\] {
+  width: 75%;
 }
 .w-full {
   width: 100%;
 }
-.min-w-\[300PX\] {
-  min-width: 300PX;
-}
-.min-w-\[300px\] {
-  min-width: 300px;
-}
-.min-w-\[700px\] {
-  min-width: 700px;
-}
-.min-w-\[350px\] {
-  min-width: 350px;
+.max-w-\[1240px\] {
+  max-width: 1240px;
 }
 .max-w-\[500px\] {
   max-width: 500px;
@@ -677,14 +687,6 @@ video {
 }
 .grow {
   flex-grow: 1;
-}
-.rotate-180 {
-  --tw-rotate: 180deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-.rotate-90 {
-  --tw-rotate: 90deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -729,6 +731,13 @@ video {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
+.bg-\[\#ecf0f3\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(236 240 243 / var(--tw-bg-opacity));
+}
+.bg-black\/70 {
+  background-color: rgb(0 0 0 / 0.7);
+}
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
@@ -749,14 +758,21 @@ video {
 .to-\[\#f6dc30\] {
   --tw-gradient-to: #f6dc30 var(--tw-gradient-to-position);
 }
+.p-10 {
+  padding: 2.5rem;
+}
+.p-2 {
+  padding: 0.5rem;
+}
 .p-3 {
   padding: 0.75rem;
 }
 .p-5 {
   padding: 1.25rem;
 }
-.p-4 {
-  padding: 1rem;
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 .px-5 {
   padding-left: 1.25rem;
@@ -766,8 +782,16 @@ video {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 .text-center {
   text-align: center;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 .text-sm {
   font-size: 0.875rem;
@@ -776,10 +800,6 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
 }
 .font-bold {
   font-weight: 700;
@@ -845,12 +865,19 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
-.ease-in-out {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+.duration-500 {
+  transition-duration: 500ms;
+}
+.ease-in {
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
 
 #id {
   margin-left: 100px;
+}
+
+.hover\:border-b:hover {
+  border-bottom-width: 1px;
 }
 
 .hover\:bg-gradient-to-r:hover {
@@ -861,6 +888,29 @@ video {
 
   .sm\:grid {
     display: grid;
+  }
+
+  .sm\:w-\[60\%\] {
+    width: 60%;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
+}
+
+@media (min-width: 1536px) {
+
+  .\32xl\:px-16 {
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 }
 

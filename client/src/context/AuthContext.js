@@ -40,7 +40,7 @@ export const AuthContextProvider = ({ children }) => {
         if (!data) {
           throw data;
         }
-        console.log("LOGINACCOUNT SUCCESS", data);
+        console.log("LOGIN ACCOUNT SUCCESS", data);
       })
       .catch((err) => {
         console.log("LOGINACCOUNT FAIL", err);
@@ -59,7 +59,7 @@ export const AuthContextProvider = ({ children }) => {
       //add logic in here
 
       setUser(currentUser);
-      console.log("USERRrrrr", currentUser);
+      console.log("Current User:", currentUser);
     });
 
     return () => {

@@ -2,6 +2,8 @@ import React from "react";
 import Login from "../components/Login.jsx";
 import Home from "../components/Home.jsx";
 import Account from "../components/Account.jsx";
+import About from "../components/About.jsx";
+
 import { Route, Routes } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Protected from "../components/Protected.jsx";
@@ -21,12 +23,13 @@ we return the home page. (check Protected File)
 
 const App = () => {
   return (
-    <div className="min-w-[350px]">
+    <div>
       <AuthContextProvider>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/About" element={<About />} />
           <Route
             path="/Account"
             element={
